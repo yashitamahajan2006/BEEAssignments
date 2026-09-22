@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Online Exam Result</title>
+</head>
+
+<body>
+
+    <h1>Online Exam Result</h1>
+
+    <button onclick="checkResult()">
+        Check Result
+    </button>
+
+    <p id="result"></p>
+
+
+    <script>
+
+        function calculateResult() {
+
+            // A Promise represents a result that will be available
+            // sometime in the future.
+            // Here, the Promise means:
+            // "I will give you the exam result later."
+
+            return new Promise(resolve => {
+
+                // setTimeout() is used to simulate
+                // the result calculation taking 3 seconds.
+
+                setTimeout(() => {
+
+                    // resolve() means that the asynchronous
+                    // work has been completed successfully.
+
+                    resolve("Your result is ready! You scored 85 marks.");
+
+                }, 3000);
+
+            });
+        }
+
+
+        // async allows us to use await inside this function.
+        // An async function always returns a Promise.
+
+        async function checkResult() {
+
+            const resultArea = document.getElementById("result");
+
+            // Show this message immediately
+            resultArea.innerText = "Calculating your result...";
+
+
+            // await means:
+            // "Wait for the Promise to finish and give me its result."
+            //
+            // The function waits here until calculateResult()
+            // completes after 3 seconds.
+            //
+            // The entire browser does NOT freeze.
+            // Only this async function waits.
+
+            const result = await calculateResult();
+
+
+            // After 3 seconds, the Promise is resolved
+            // and the result is displayed.
+
+            resultArea.innerText = result;
+
+        }
+
+    </script>
+
+</body>
+
+</html>
